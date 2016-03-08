@@ -72,7 +72,7 @@ namespace Invoices
             return dataset;
         }
 
-        private async void button1_Click(object sender, EventArgs e)
+        private void button1_Click(object sender, EventArgs e)
         {
             try
             {
@@ -109,8 +109,7 @@ namespace Invoices
 
                 dc.CreateDocument(_inputPath, _outputPath);
 
-                //You could also use the async version of the method. Use the intellisense to explore other options.
-                //dc.CreateDocumentAsync(_inputPath, _outputPath);
+        
 
                 System.Diagnostics.Process.Start(_outputPath);
 

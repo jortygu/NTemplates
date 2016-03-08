@@ -140,36 +140,36 @@ namespace NTemplates
         }
 
 
-        internal async Task<string> ParseAsync(string text)
-        {
-            DataManager.ResetRecordPositions();
+        //internal async Task<string> ParseAsync(string text)
+        //{
+        //    DataManager.ResetRecordPositions();
 
-            RTFInput = CleanPlaceHolders(text);
+        //    RTFInput = CleanPlaceHolders(text);
             
-            //Set the starting point for the recursive process    
-            rootOutputNode = new OutputNode();
-            CurrentOutputNode = rootOutputNode;
+        //    //Set the starting point for the recursive process    
+        //    rootOutputNode = new OutputNode();
+        //    CurrentOutputNode = rootOutputNode;
 
-            GetControlBlocks();
-            documentNode.Expand();
+        //    GetControlBlocks();
+        //    documentNode.Expand();
 
-            //Generate the ouput!!
-            StringBuilder rootText = rootOutputNode.Text;
-            if (rootText != null)
-                RTFOutput = rootOutputNode.Text.ToString().Trim();
-            else
-                RTFOutput = "";
+        //    //Generate the ouput!!
+        //    StringBuilder rootText = rootOutputNode.Text;
+        //    if (rootText != null)
+        //        RTFOutput = rootOutputNode.Text.ToString().Trim();
+        //    else
+        //        RTFOutput = "";
 
-            foreach (OutputNode child in rootOutputNode.Children)
-            {
-                RTFOutput += child.GetFullText().ToString().Trim();
-            }
+        //    foreach (OutputNode child in rootOutputNode.Children)
+        //    {
+        //        RTFOutput += child.GetFullText().ToString().Trim();
+        //    }
 
 
       
 
-            return RTFOutput;
-        }
+        //    return RTFOutput;
+        //}
 
 
 

@@ -179,15 +179,15 @@ namespace NTemplates
         /// </summary>
         /// <param name="inputFile">The complete input file path, imcluding file name</param>
         /// <param name="outputFile">The complete output file path, imcluding file name</param>
-        public async void CreateDocumentAsync(string inputFile, string outputFile)
-        {
-            await CreateDocumentInternalAsync(inputFile, outputFile);     
-        }
+        //public async void CreateDocumentAsync(string inputFile, string outputFile)
+        //{
+        //    await CreateDocumentInternalAsync(inputFile, outputFile);     
+        //}
 
-        private Task CreateDocumentInternalAsync(string inputFile, string outputFile)
-        {
-           return Task.Factory.StartNew(() => CreateDocument(inputFile, outputFile));        
-        }
+        //private Task CreateDocumentInternalAsync(string inputFile, string outputFile)
+        //{
+        //   return Task.Factory.StartNew(() => CreateDocument(inputFile, outputFile));        
+        //}
 
         #endregion
 
@@ -213,10 +213,10 @@ namespace NTemplates
         /// </summary>
         /// <param name="inputStream">An instance of MemoryStream representing the template.</param>
         /// <param name="outputFile">The complete output file path, imcluding file name</param>
-        public async void CreateDocumentAsync(Stream inputStream, string outputFile)
-        {
-            await CreateDocumentInternalAsync(inputStream, outputFile);
-        }
+        //public async void CreateDocumentAsync(Stream inputStream, string outputFile)
+        //{
+        //    await CreateDocumentInternalAsync(inputStream, outputFile);
+        //}
 
         private Task CreateDocumentInternalAsync(Stream inputStream, string outputFile)
         {
@@ -245,10 +245,10 @@ namespace NTemplates
                 throw new ArgumentException("inputFile cannot be null or empty string");
         }
 
-        public async void CreateDocumentToMemoryStreamAsync(string inputFile)
-        {
-            await CreateDocumentToMemoryStreamInteralAsync(inputFile);
-        }
+        //public async void CreateDocumentToMemoryStreamAsync(string inputFile)
+        //{
+        //    await CreateDocumentToMemoryStreamInteralAsync(inputFile);
+        //}
 
         private Task CreateDocumentToMemoryStreamInteralAsync(string inputFile)
         {
@@ -279,10 +279,10 @@ namespace NTemplates
         /// </summary>
         /// <param name="inputStream">An Stream representing the template.</param>
         /// <returns>MemoryStream</returns>
-        public async void CreateDocumentToMemoryStreamAsync(Stream inputStream)
-        {
-            await CreateDocumentToMemoryStreamInternalAsync(inputStream);
-        }
+        //public async void CreateDocumentToMemoryStreamAsync(Stream inputStream)
+        //{
+        //    await CreateDocumentToMemoryStreamInternalAsync(inputStream);
+        //}
 
         private Task CreateDocumentToMemoryStreamInternalAsync(Stream inputStream)
         {

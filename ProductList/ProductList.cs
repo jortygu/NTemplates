@@ -70,9 +70,6 @@ namespace ProductList
 
             dc.CreateDocument(@"..\..\Templates\ProductListSample.rtf", outputpath);
 
-            //You could also use the async version, useful for other scenarios. Use the intellisense to explore other options.
-            //dc.CreateDocumentAsync(@"..\..\Templates\ProductListSample.rtf", outputpath);
-
             Process.Start(outputpath);
         }
 
