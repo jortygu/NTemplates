@@ -1,0 +1,5 @@
+﻿This is an example of how to print an invoice. By pressing the "Print Invoice" button, you'll get an rtf document with invoice information. The information is created via code, but it could come from a database or another source.
+
+The example deals with two tables, one for invoice and the other for the invoice lines.
+
+Check the code where you'll see how events are handled to calculate summaries.

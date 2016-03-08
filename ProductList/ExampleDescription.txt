@@ -1,0 +1,7 @@
+﻿This example shows how to use a SCAN combined with an IF to achieve conditional formatting. It also uses event handlers to perform claculations for summaries. 
+
+Here you'll see how to use NTemplates with plain objects instead of DataTables.
+
+The template and the resulting report can be found at ..\..\Templates\ProductList.rtf
+
+Modify records in the grid or add new ones at will, then press the 'Print' button. The report will be open with the default RTF editor.
