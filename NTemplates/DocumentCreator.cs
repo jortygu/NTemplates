@@ -167,8 +167,6 @@ namespace NTemplates
                 string RTF = File.ReadAllText(inputFile);
                 parser.Parse(RTF);
                 File.WriteAllText(outputFile, parser.RTFOutput);
-
-                System.Diagnostics.Process.Start(outputFile);
             }
             else
                 throw new ArgumentException("inputFile cannot be null or empty string");
@@ -224,8 +222,7 @@ namespace NTemplates
         }
 
         #endregion
-
-
+        
         #region Input from file, output to memory stream
 
         /// <summary>

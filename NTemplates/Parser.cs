@@ -115,20 +115,20 @@ namespace NTemplates
         {
             DataManager.ResetRecordPositions();
 
-            RTFInput = CleanPlaceHolders(text);
+            RTFInput = SanitizePlaceholders(text);
           
 
             //Set the starting point for the recursive process    
-            rootOutputNode = new OutputNode();
-            CurrentOutputNode = rootOutputNode;
+            this.rootOutputNode = new OutputNode();
+            this.CurrentOutputNode = rootOutputNode;
 
             GetControlBlocks();
-            documentNode.Expand();
+            this.documentNode.Expand();
 
             //Generate the ouput!!
-            StringBuilder rootText = rootOutputNode.Text;
+            StringBuilder rootText = this.rootOutputNode.Text;
             if (rootText != null)
-                RTFOutput = rootOutputNode.Text.ToString().Trim();
+                RTFOutput = this.rootOutputNode.Text.ToString().Trim();
             else
                 RTFOutput = "";
 
@@ -145,7 +145,7 @@ namespace NTemplates
         //    DataManager.ResetRecordPositions();
 
         //    RTFInput = CleanPlaceHolders(text);
-            
+
         //    //Set the starting point for the recursive process    
         //    rootOutputNode = new OutputNode();
         //    CurrentOutputNode = rootOutputNode;
@@ -166,7 +166,7 @@ namespace NTemplates
         //    }
 
 
-      
+
 
         //    return RTFOutput;
         //}
@@ -174,14 +174,19 @@ namespace NTemplates
 
 
 
-
-        private StringBuilder CleanPlaceHolders(string text)
+        /// <summary>
+        /// Replaces any occurrence within any of the placeholders of the character “ with "
+        /// </summary>
+        /// <param name="text"></param>
+        /// <returns></returns>
+        private StringBuilder SanitizePlaceholders(string text)
         {                        
             return new StringBuilder(TextCleaner.CleanText(text, _d+".+?"+_d));
         }
 
         private void GetControlBlocks()
         {
+            //Locate and put an special mark on the "progamming sentences" so it's easier to find and delete them later.
             PreprocessText();
 
             Regex regex = CommonMethods.GetRegex(KeywordsRegExString);
@@ -193,13 +198,13 @@ namespace NTemplates
             documentNode.Start = 0;
             if (matchCollection.Count > 0)
             {
-                documentNode.End = matchCollection[0].Index - 1;// TODO: CAMBIO matchCollection[0].Index;
+                documentNode.End = matchCollection[0].Index - 1;
             }
             else
             {
-                documentNode.End = RTFInput.Length - 1;
+                documentNode.End = RTFInput.Length;
             }
-            documentNode.InnerText = RTFInput.ToString().InnerString(documentNode.Start, documentNode.End).Trim(); // TODO: CAMBIO RTFInput.ToString().InnerString(documentNode.Start, documentNode.End);
+            documentNode.InnerText = RTFInput.ToString().InnerString(documentNode.Start, documentNode.End).Trim(); 
             documentNode.DocumentParser = this;
             IControlBlock currentNode = documentNode;
 
@@ -312,15 +317,20 @@ namespace NTemplates
 
                 #endregion
             }
-            IControlBlock trailingText = CreateTextBlock(matchCollection[currRegex - 1], currentNode);
-            currentNode = CloseControlBlock(trailingText/*, matchCollection[currRegex - 1].Index*/);
 
+            Match startMatch = null;
+            if (matchCollection.Count > 0)
+            {
+                startMatch = matchCollection[currRegex - 1];
+                IControlBlock trailingText = CreateTextBlock(startMatch, currentNode);
+                currentNode = CloseControlBlock(trailingText);
+            }
         }
 
         private IControlBlock CreateTextBlock(Match match, IControlBlock parentNode)
         {
             IControlBlock textBlock = new TextBlock(false);
-            textBlock.Start = match.Index + match.Length;
+            textBlock.Start = match == null ? 0 : match.Index + match.Length;
             textBlock.DocumentParser = this;
             textBlock.Parent = parentNode;
             textBlock.OpenRegEx = match;

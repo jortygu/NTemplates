@@ -1,6 +1,8 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Examples", "Examples", "{A0AB04B5-C534-43D4-B423-E419C9FD7CC7}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NTemplates", "NTemplates\NTemplates.csproj", "{65723159-1FDA-43B3-B09B-04A7E329B624}"
@@ -14,6 +16,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ParentChild", "ParentChild\ParentChild.csproj", "{EC73E121-095B-4728-93FD-5B22102808E4}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProductListNestedScans", "ProductListNestedScans\ProductListNestedScans.csproj", "{32B1538B-B25A-4928-A8D7-D0B2A360C121}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LetterExample", "LetterExample\LetterExample\LetterExample.csproj", "{7B9EB0E2-1E4B-4269-83B6-3DD3DD01117F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -118,6 +122,24 @@ Global
 		{32B1538B-B25A-4928-A8D7-D0B2A360C121}.Release|Mixed Platforms.Build.0 = Release|x86
 		{32B1538B-B25A-4928-A8D7-D0B2A360C121}.Release|x86.ActiveCfg = Release|x86
 		{32B1538B-B25A-4928-A8D7-D0B2A360C121}.Release|x86.Build.0 = Release|x86
+		{7B9EB0E2-1E4B-4269-83B6-3DD3DD01117F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7B9EB0E2-1E4B-4269-83B6-3DD3DD01117F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7B9EB0E2-1E4B-4269-83B6-3DD3DD01117F}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{7B9EB0E2-1E4B-4269-83B6-3DD3DD01117F}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{7B9EB0E2-1E4B-4269-83B6-3DD3DD01117F}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{7B9EB0E2-1E4B-4269-83B6-3DD3DD01117F}.Debug|x86.Build.0 = Debug|Any CPU
+		{7B9EB0E2-1E4B-4269-83B6-3DD3DD01117F}.DebugLocal|Any CPU.ActiveCfg = Debug|Any CPU
+		{7B9EB0E2-1E4B-4269-83B6-3DD3DD01117F}.DebugLocal|Any CPU.Build.0 = Debug|Any CPU
+		{7B9EB0E2-1E4B-4269-83B6-3DD3DD01117F}.DebugLocal|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{7B9EB0E2-1E4B-4269-83B6-3DD3DD01117F}.DebugLocal|Mixed Platforms.Build.0 = Debug|Any CPU
+		{7B9EB0E2-1E4B-4269-83B6-3DD3DD01117F}.DebugLocal|x86.ActiveCfg = Debug|Any CPU
+		{7B9EB0E2-1E4B-4269-83B6-3DD3DD01117F}.DebugLocal|x86.Build.0 = Debug|Any CPU
+		{7B9EB0E2-1E4B-4269-83B6-3DD3DD01117F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7B9EB0E2-1E4B-4269-83B6-3DD3DD01117F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7B9EB0E2-1E4B-4269-83B6-3DD3DD01117F}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{7B9EB0E2-1E4B-4269-83B6-3DD3DD01117F}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{7B9EB0E2-1E4B-4269-83B6-3DD3DD01117F}.Release|x86.ActiveCfg = Release|Any CPU
+		{7B9EB0E2-1E4B-4269-83B6-3DD3DD01117F}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -128,5 +150,6 @@ Global
 		{A0D58F7B-55F2-4CFC-AB8C-BF94F8CF32E7} = {A0AB04B5-C534-43D4-B423-E419C9FD7CC7}
 		{EC73E121-095B-4728-93FD-5B22102808E4} = {A0AB04B5-C534-43D4-B423-E419C9FD7CC7}
 		{32B1538B-B25A-4928-A8D7-D0B2A360C121} = {A0AB04B5-C534-43D4-B423-E419C9FD7CC7}
+		{7B9EB0E2-1E4B-4269-83B6-3DD3DD01117F} = {A0AB04B5-C534-43D4-B423-E419C9FD7CC7}
 	EndGlobalSection
 EndGlobal

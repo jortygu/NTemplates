@@ -6,9 +6,7 @@ using System.Collections.Generic;
 namespace NTemplates
 {
     internal static class TextCleaner
-    {
-
-
+    {        
         internal static string CleanText(string rtfText, string KeywordsRegExString)
         {
             Regex regex = CommonMethods.GetRegex(KeywordsRegExString);
