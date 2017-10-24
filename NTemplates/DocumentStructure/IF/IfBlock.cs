@@ -17,10 +17,7 @@ namespace NTemplates.DocumentStructure
 
         private void InitializeFromMatch(Match start)
         {
-            string cond = start.ToString();
-            int ob = cond.IndexOf("(");
-            int le = cond.Length - ob - 3;
-            Condition = cond.Substring(ob + 1, le);
+            Condition = DocumentParser.ParseCondition(start.ToString());
         }
 
         #region IControlBlock Members

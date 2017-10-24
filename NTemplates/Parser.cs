@@ -139,6 +139,12 @@ namespace NTemplates
 
         }
 
+        public string ParseCondition(string cond)
+        {
+            int ob = cond.IndexOf("(");
+            int le = cond.Length - ob - (_d.Length + 2); 
+            return cond.Substring(ob + 1, le);
+        }
 
         //internal async Task<string> ParseAsync(string text)
         //{
@@ -360,7 +366,7 @@ namespace NTemplates
         private void PreprocessText()
         {
             //Check to see if must work with RTF or plain text format.
-            idFmt = TextFormat == eTextFormat.Text ? (IDocumentFormat)new TextFormat() : (IDocumentFormat)new RTFFormat();
+            /*idFmt = TextFormat == eTextFormat.Text ? (IDocumentFormat)new TextFormat() : (IDocumentFormat)new RTFFormat();
 
             //Get Matches for any possible placeholder
             Regex regex0 = CommonMethods.GetRegex(KeywordsRegExString);
@@ -376,7 +382,7 @@ namespace NTemplates
                     RTFInput = RTFInput.Insert(i, "\\DEL");
                 }
             }
-            RTFInput = RTFInput.Replace("\\DEL", "");
+            RTFInput = RTFInput.Replace("\\DEL", "");*/
         }
 
         private IControlBlock CloseControlBlock(IControlBlock closingNode, Match match)
