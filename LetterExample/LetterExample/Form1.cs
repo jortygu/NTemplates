@@ -41,21 +41,23 @@ namespace LetterExample
             //I encourage you to explore other overloads of the function CreateDocument
             dc.CreateDocument(_inputPath,_outputPath);
             if (!_unitTest)
-                Process.Start(_outputPath);
+                Process.Start(_outputPath);               
+
         }
 
 
         private void AddDataForReport(DocumentCreator dc)
         {
-            /* Here we are going to add the data that we want to display. Typically it would come from a Database, a file, or a
-             * web service, but NTemplates doesn´t care about that, it´s up to you and your requirements.
-             * NOTE: NTemplates accepts input data in several formats.
-             *    - As ASP.Net data tables.
-             *    - As lists of POCOs.
-             *    - As variables.
-             * Here we are going to start by using simple variables.
-             * 
-             * PLEASE NOTE THAT VARIABLE NAMES ARE CASE SENSITIVE */
+            /* Here we are going to add the data that we want to display. Typically it would come 
+                * from a Database, a file, or a
+                * web service, but NTemplates doesn´t care about that, it´s up to you and your requirements.
+                * NOTE: NTemplates accepts input data in several formats.
+                *    - As ASP.Net data tables.
+                *    - As lists of POCOs.
+                *    - As variables.
+                * Here we are going to start by using simple variables.
+                * 
+                * PLEASE NOTE THAT VARIABLE NAMES ARE CASE SENSITIVE */
 
             dc.AddString("title", "Mr.");
 
@@ -67,13 +69,20 @@ namespace LetterExample
              * articles. You can explore the examples inclued with the NTemplates downloads. */            
             dc.AddString("date", _letterDate);
 
+            /* We could add a date in it´s native format and then format it as we wish  at the template itself. 
+                * That´s the recommended way of doing
+                * it because it provides much more flexibility for the end users.
+                * In order to keep things simple we will add the date as string. I will introduce 
+                * formatting functions in future 
+                * articles. You can explore the examples inclued with the NTemplates downloads. */            
+
             dc.AddString("address", "secret for now, and will be revealed at the last moment");
 
-            dc.AddString("email","gmddmg@gmail.com");
+            dc.AddString("email", "inviter@email.com");
 
             dc.AddString("inviterName", "Gonzalo Méndez");
         
-            dc.AddString("inviterCompany", "gmddmg@gmail.com");
+            dc.AddString("inviterCompany", "Rocksolid Labs");
 
             dc.AddString("inviterUrl", "www.rocksolidlabs.com");
 
