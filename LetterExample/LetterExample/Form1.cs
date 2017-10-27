@@ -69,7 +69,7 @@ namespace LetterExample
                 * In order to keep things simple we will add the date as string. I will introduce 
                 * formatting functions in future 
                 * articles. You can explore the examples inclued with the NTemplates downloads. */            
-                   dc.AddString("date", _letterDate);
+            dc.AddString("date", _letterDate);
 
             dc.AddString("address", "secret for now, and will be revealed at the last moment");
 
