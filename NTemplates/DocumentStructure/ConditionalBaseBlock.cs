@@ -52,7 +52,7 @@ namespace NTemplates.DocumentStructure
                     if (Condition.Contains(placeholder))
                     {
                         object parameter = DocumentParser.DataManager.GetCurrentValueForPlaceHolderObject(placeholder, false);
-                        parameters.Add(parameter);
+                        parameters.Add(Convert.IsDBNull(parameter) ? null : parameter);
                     }
                 }
                 object instance = _evaluator.CreateInstance("NTemplates._Evaluator");
