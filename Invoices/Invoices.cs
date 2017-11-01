@@ -27,17 +27,19 @@ namespace Invoices
 
         private string _exampleDescriptionPath = @"..\..\ExampleDescription.txt";
         private bool _unitTest = false;
+        private string _invoiceDate = DateTime.Today.ToShortDateString();
 
         public Invoices()
         {
             InitializeComponent();
         }
 
-        public Invoices(string inputPath, string outputPath, string exampleDescriptionPath) : this()
+        public Invoices(string inputPath, string outputPath, string exampleDescriptionPath, string invoiceDate) : this()
         {
             _inputPath = Path.GetFullPath(inputPath);
             _outputPath = Path.GetFullPath(outputPath);
             _exampleDescriptionPath = Path.GetFullPath(exampleDescriptionPath);
+            _invoiceDate = invoiceDate;
             _unitTest = true;
         }
 
@@ -105,7 +107,7 @@ namespace Invoices
                 //By calling the Add<Type> methods of DocumentCreator, we add variables to the 
                 //document creator memory space. We can use those for showing values in the report
                 //itself or, we can use them for internal calculations.
-                dc.AddDateTime("invDate", DateTime.Today); //Invoice date
+                dc.AddDateTime("invDate", DateTime.Parse(_invoiceDate)); //Invoice date
                 dc.AddDouble(_extprice, 0); //Line total (price * units)  
                 dc.AddDouble(_subtotal, 0); //Sum of all extPrices
                 dc.AddDouble(_taxes, 0); //Asume this is a calculated result

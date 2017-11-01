@@ -81,7 +81,7 @@ namespace NTemplates
                 foreach (DataColumn column in tbmgr.Table.Columns)
                 {
                     string originalFieldNotation = tbmgr.Table.TableName + "." + column.ColumnName;
-                    if (expression.Contains(originalFieldNotation))
+                    if (expression.Contains(originalFieldNotation) || expression.Contains(tbmgr.Table.TableName + column.ColumnName))
                     {
                         MethodArgument arg = new MethodArgument()
                              {

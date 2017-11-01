@@ -14,7 +14,7 @@ namespace NTemplates.Tests
             var outputPath = "@../../../../Generated/Invoice.Rtf";
             var exampleDescriptionPath = @"../../../Invoices/ExampleDescription.txt";
 
-            var invoice = new Invoices.Invoices(inputTemplatePath,outputPath, exampleDescriptionPath);
+            var invoice = new Invoices.Invoices(inputTemplatePath,outputPath, exampleDescriptionPath, "27/10/2017");
             invoice.Invoices_Load(null,null);
             invoice.Button1_Click(null,null);
             invoice.Close();
@@ -68,7 +68,7 @@ namespace NTemplates.Tests
         public void ProductListNestedScansTest()
         {
             var inputTemplatePath = @"../../../ProductListNestedScans/Templates/ProductListWithGroupingsSample.rtf";
-            var outputPath = "@../../../../Generated/ProductListNestedScan.Rtf";
+            var outputPath = "@../../../../Generated/ProductListNestedScans.Rtf";
             var exampleDescriptionPath = @"../../../ProductListNestedScans/ExampleDescription.txt";
 
             var productListNestedScans = new ProductListNestedScans.ProductListNestedScans(inputTemplatePath, outputPath, exampleDescriptionPath);

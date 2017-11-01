@@ -161,6 +161,7 @@ namespace NTemplates
 
         private void GetControlBlocks()
         {
+            bool fetchedTrailingText = false;
             //Locate and put an special mark on the "progamming sentences" so it's easier to find and delete them later.
             PreprocessText();
 
@@ -263,6 +264,7 @@ namespace NTemplates
                             {
                                 //It's the end of the document, close the textblock right here
                                 currentNode = CloseControlBlock(currentNode);
+                                fetchedTrailingText = true;
                             }
                             break;
                         }
@@ -281,6 +283,7 @@ namespace NTemplates
                             {
                                 //It's the end of the document, close the textblock right here
                                 currentNode = CloseControlBlock(currentNode);
+                                fetchedTrailingText = true;
                             }
 
                             break;
@@ -292,7 +295,7 @@ namespace NTemplates
             }
 
             Match startMatch = null;
-            if (matchCollection.Count > 0)
+            if (matchCollection.Count > 0 && !fetchedTrailingText)
             {
                 startMatch = matchCollection[currRegex - 1];
                 IControlBlock trailingText = CreateTextBlock(startMatch, currentNode);
