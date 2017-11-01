@@ -12,8 +12,7 @@ namespace NTemplates.Tests.Tests
             @"../../Templates/Nesting3.rtf",
             @"../../Templates/Nesting4.rtf",
             @"../../Templates/Nesting5.rtf",
-            @"../../Templates/Nesting6.rtf",
-            @"../../Templates/Nesting7.rtf"
+            @"../../Templates/Nesting6.rtf"
         };
 
         public List<string> outputPath = new List<string>()
@@ -23,8 +22,7 @@ namespace NTemplates.Tests.Tests
             "@../../../../Generated/Nesting3.Rtf",
             "@../../../../Generated/Nesting4.Rtf",
             "@../../../../Generated/Nesting5.Rtf",
-            "@../../../../Generated/Nesting6.Rtf",
-            "@../../../../Generated/Nesting7.Rtf"
+            "@../../../../Generated/Nesting6.Rtf"
         };
 
 
@@ -35,8 +33,7 @@ namespace NTemplates.Tests.Tests
             @"../../ComparisonData/Nesting3.rtf",
             @"../../ComparisonData/Nesting4.rtf",
             @"../../ComparisonData/Nesting5.rtf",
-            @"../../ComparisonData/Nesting6.rtf",
-            @"../../ComparisonData/Nesting7.rtf",
+            @"../../ComparisonData/Nesting6.rtf"
         };
 
         [Fact]
