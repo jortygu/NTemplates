@@ -211,14 +211,4 @@ GeneratedArtifacts/
 _Pvt_Extensions/
 ModelManifest.xml
 Documents/Kickboxing.odt
-/NTemplates.Tests/Generated/Letter.Rtf
-/NTemplates.Tests/Generated/Nesting1.Rtf
-/NTemplates.Tests/Generated/Nesting2.Rtf
-/NTemplates.Tests/Generated/Nesting3.Rtf
-/NTemplates.Tests/Generated/Nesting4.Rtf
-/NTemplates.Tests/Generated/Nesting5.Rtf
-/NTemplates.Tests/Generated/ParentChild.Rtf
-/NTemplates.Tests/Generated/ProductList.Rtf
-/NTemplates.Tests/Generated/ProductListNestedScan.Rtf
-/NTemplates.Tests/Generated/ProductListWithGroupings.Rtf
-/NTemplates.Tests/Generated/Invoice.Rtf
+/NTemplates.Tests/Generated
