@@ -91,8 +91,7 @@ namespace Invoices
                 DataSet MyData = LoadData();
 
                 //DocumentCreator represents the API to the NTemplates engine, so we need to instantiate it                
-                //dc = new DocumentCreator();
-                dc = new DocumentCreator("#", "#");
+            dc = new DocumentCreator("<", ">");
 
                 //We need to make the DocumentCreator instance aware of the tables by ccalling the AddDataTable method
                 //for each need table.
@@ -126,7 +125,7 @@ namespace Invoices
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show(ex.StackTrace);
             }
         }
 

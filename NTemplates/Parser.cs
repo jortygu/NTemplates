@@ -3,8 +3,7 @@ using System.Text.RegularExpressions;
 using NTemplates.DocumentStructure;
 using NTemplates.DocumentFormat;
 using NTemplates.EventArgs;
-using System.Threading.Tasks;
-using System.Collections.Generic;
+using System;
 
 namespace NTemplates
 {
@@ -31,51 +30,80 @@ namespace NTemplates
         private OutputNode rootOutputNode;
         private DataManager dataManager;
         private bool _preprocessText;
+        private string _lDel, _rDel;
         internal string KeywordsRegExString;
         internal string FunctionsRegexString;
+        
         IDocumentFormat idFmt;
         #endregion
 
         #region Constants
 
-        public string _d { get; private set; }
+        public string LDel
+        {
+            get { return Regex.Escape(_lDel); }
+            private set { _lDel = value; }
+        }
+
+        public string RDel
+        {
+            get { return Regex.Escape(_rDel); }
+            private set { _rDel = value; }
+        }
 
         internal string _identif = @"[a-z]([a-z]*[0-9]*)*";
         //Construction Blocks
-        internal string _scan => _d + @"SCAN\(" + _identif + @"\)" + _d;
+        internal string _scan => LDel + @"SCAN\(" + _identif + @"\)" + RDel;
 
         //Not used in the current version
         internal string _count => @"COUNT\(" + _identif + @"\)";
         //Not used in the current version
         internal string _sum => @"SUM\(" + _identif + @"\)";
 
-        internal string _endscan => _d + @"ENDSCAN" + _d; 
+        internal string _endscan => LDel + @"ENDSCAN" + RDel; 
         
-        internal string _scanfor => _d + @"SCAN\(" + _identif + @"\)\s*FOR\s*\(.+?\)" + _d;
-        internal string _if => _d + @"IF\s*\(.+?\)"+_d;
-        internal string _else => _d + @"ELSE" + _d;
-        internal string _endif => _d + @"ENDIF" + _d;
+        internal string _scanfor => LDel + @"SCAN\(" + _identif + @"\)\s*FOR\s*\(.+?\)" + RDel;
+        internal string _if => LDel + @"IF\s*\(.+?\)"+ RDel;
+        internal string _else => LDel + @"ELSE" + RDel;
+        internal string _endif => LDel + @"ENDIF" + RDel;
 
         //Page Break command
-        internal string _pgbrk => _d + "PAGE_BRK" + _d;
+        internal string _pgbrk => LDel + "PAGE_BRK" + RDel;
 
         //Functions
-        internal string _dtfmt => _d + @"Dtfmt\s*\(.+?\)" + _d; //Function "Date Format";    
+        internal string _dtfmt => LDel + @"Dtfmt\s*\(.+?\)" + RDel; //Function "Date Format";    
 
-        internal string _dbfmt => _d + @"Dbfmt\s*\(.+?\)" + _d; //Function "Double Format";    //internal static string _dbfmt = _d + @"Dbfmt\s*\(([0-9]|.)+?\)" + _d; //Function "Double Format";
+        internal string _dbfmt => LDel + @"Dbfmt\s*\(.+?\)" + RDel; //Function "Double Format";    //internal static string _dbfmt = _d + @"Dbfmt\s*\(([0-9]|.)+?\)" + _d; //Function "Double Format";
 
-        internal string _hlnk => _d + @"Hlnk\s*\(.+?\)" + _d; //Function "Hyperlink"
+        internal string _hlnk => LDel + @"Hlnk\s*\(.+?\)" + RDel; //Function "Hyperlink"
 
         #endregion
 
+        [Obsolete("Use the constructor that takes in both left and right deliniters instead")]
         internal Parser(ETextFormat format, string delimiter = "#", bool preprocessText = true)
         {
+            LDel = delimiter;
+            RDel = delimiter;
+
+            Initialize(format, preprocessText);
+        }
+
+        internal Parser(ETextFormat format, string leftDelimiter = "#", string rightDelimiter = "#", bool preprocessText = true)
+        {
+            LDel = leftDelimiter;
+            RDel = rightDelimiter;
+
+            Initialize(format, preprocessText);
+        }
+
+        private void Initialize(ETextFormat format, bool preprocessText)
+        {
             _preprocessText = preprocessText;
-            _d = delimiter;
+
             TextFormat = format;
             DataManager = new DataManager(this);
-           
-            KeywordsRegExString =  @"\b*(" + _scan + "|"
+
+            KeywordsRegExString = @"\b*(" + _scan + "|"
                             + _endscan + "|"
                             + _scanfor + "|"
                             + _if + "|"
@@ -145,7 +173,7 @@ namespace NTemplates
         public string ParseCondition(string cond)
         {
             int ob = cond.IndexOf("(");
-            int le = cond.Length - ob - (_d.Length + 2); 
+            int le = cond.Length - ob - (LDel.Length + 2); 
             return cond.Substring(ob + 1, le);
         }
 
@@ -155,8 +183,8 @@ namespace NTemplates
         /// <param name="text"></param>
         /// <returns></returns>
         private StringBuilder SanitizePlaceholders(string text)
-        {                        
-            return new StringBuilder(TextCleaner.CleanText(text, _d+".+?"+_d));
+        {
+            return new StringBuilder(TextCleaner.CleanText(text, LDel + ".+?" + RDel));
         }
 
         private void GetControlBlocks()
@@ -372,7 +400,7 @@ namespace NTemplates
             cb.MatchEnd = RTFInput.Length;
             cb.CloseRegEx = null;
             closingNode.End = RTFInput.Length;
-            closingNode.InnerText = RTFInput.ToString().InnerString(closingNode.Start, closingNode.End).Trim(); // TODO: CAMBIO RTFInput.ToString().InnerString(closingNode.Start, closingNode.End);
+            closingNode.InnerText = RTFInput.ToString().InnerString(closingNode.Start, closingNode.End).Trim(); 
 
             closingNode = closingNode.Parent;
             return closingNode;

@@ -29,7 +29,7 @@ namespace NTemplates
         public event BeforeScanRecordEventHandler BeforeScanRecord;
         public event ScanEndedEventHandler ScanEnded;
 
-
+        [Obsolete("Use the constructor that takes in both left and right deliniters instead")]
         public DocumentCreator(string delimiter, bool preprocessText)
         {
             parser = new Parser(ETextFormat.RTF,delimiter,preprocessText)
@@ -38,9 +38,18 @@ namespace NTemplates
             };
         }
 
+        [Obsolete]
         public DocumentCreator()
         {
-            parser = new Parser(ETextFormat.RTF)
+            parser = new Parser(ETextFormat.RTF, "#", "#")
+            {
+                Creator = this
+            };
+        }
+
+        public DocumentCreator(string leftDelimiter, string rightDelimiter, bool preprocessText = true)
+        {
+            parser = new Parser(ETextFormat.RTF, leftDelimiter, rightDelimiter, preprocessText)
             {
                 Creator = this
             };
@@ -64,11 +73,17 @@ namespace NTemplates
             parser.DataManager.AddDataTable(table, alias);
         }
 
+        [Obsolete("This method is deprecated. It only supports 1 level of dot chaining. Use AddObjectList instead.")]
         public void AddList<T>(IList<T> list, string alias)
         {
             DataTable dt = new TableList<T>(list).GetDataTable();
             dt.TableName = alias;
             this.AddDataTable(dt);
+        }
+
+        public void AddObjectList<T>(IList<T> list)
+        {            
+            parser.DataManager.AddObjectList(list);
         }
 
         /// <summary>

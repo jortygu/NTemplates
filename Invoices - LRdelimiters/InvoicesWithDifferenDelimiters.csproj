@@ -3,14 +3,14 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>9.0.21022</ProductVersion>
+    <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{65723159-1FDA-43B3-B09B-04A7E329B624}</ProjectGuid>
-    <OutputType>Library</OutputType>
+    <ProjectGuid>{49E85D94-3314-4C77-908E-DF4D3811D9F4}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>NTemplates</RootNamespace>
-    <AssemblyName>NTemplates</AssemblyName>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <RootNamespace>Invoices</RootNamespace>
+    <AssemblyName>Invoices</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <FileUpgradeFlags>
     </FileUpgradeFlags>
@@ -59,43 +59,50 @@
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
     <Reference Include="System.Data.DataSetExtensions">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
     <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DocumentStructure\ConditionalBaseBlock.cs" />
-    <Compile Include="ErrorInRecord.cs" />
-    <Compile Include="EvaluatorFactory.cs" />
-    <Compile Include="EventArgs\ScantStartEventArgs.cs" />
-    <Compile Include="Extensions.cs" />
-    <Compile Include="ListManager.cs" />
-    <Compile Include="TableList.cs" />
-    <Compile Include="DataManager.cs" />
-    <Compile Include="DocumentFormat\IDocumentFormat.cs" />
-    <Compile Include="DocumentFormat\RTFFormat.cs" />
-    <Compile Include="DocumentFormat\TextFormat.cs" />
-    <Compile Include="EventArgs\BeforeScanRecordEventArgs.cs" />
-    <Compile Include="DocumentStructure\CommonMethods.cs" />
-    <Compile Include="DocumentStructure\IControlBlock.cs" />
-    <Compile Include="DocumentStructure\IF\IfBlock.cs" />
-    <Compile Include="DocumentCreator.cs" />
-    <Compile Include="DocumentStructure\OutputNode.cs" />
-    <Compile Include="DocumentStructure\TextBlock.cs" />
-    <Compile Include="FunctionsEvaluator.cs" />
-    <Compile Include="IScanEventArgs.cs" />
-    <Compile Include="Parser.cs" />
+    <Compile Include="Invoices.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Invoices.Designer.cs">
+      <DependentUpon>Invoices.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="DocumentStructure\ScanBlock.cs" />
-    <Compile Include="EventArgs\AfterScanRecordEventArgs.cs" />
-    <Compile Include="EventArgs\ScanRecordEventArgsBase.cs" />
-    <Compile Include="EventArgs\ScanEndedEventArgs.cs" />
-    <Compile Include="TableManager.cs" />
-    <Compile Include="TextCleaner.cs">
-      <SubType>Code</SubType>
+    <EmbeddedResource Include="Invoices.resx">
+      <DependentUpon>Invoices.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <None Include="app.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Templates\InvoiceSample.rtf" />
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -114,6 +121,15 @@
       <ProductName>Windows Installer 3.1</ProductName>
       <Install>true</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="ExampleDescription.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\NTemplates\NTemplates.csproj">
+      <Project>{65723159-1fda-43b3-b09b-04a7e329b624}</Project>
+      <Name>NTemplates</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

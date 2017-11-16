@@ -64,7 +64,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Invoices\Invoices.csproj">
-      <Project>{49e85d94-3314-4c77-908e-df4d3811d9f4}</Project>
+      <Project>{51C23ED9-4E3C-4BF3-8DB6-DEE05C7D2DCD}</Project>
       <Name>Invoices</Name>
     </ProjectReference>
     <ProjectReference Include="..\LetterExample\LetterExample\LetterExample.csproj">

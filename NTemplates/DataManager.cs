@@ -5,6 +5,7 @@ using System.Text;
 using System.Data;
 using NTemplates.DocumentStructure;
 using System.Drawing;
+using NTemplates;
 
 namespace NTemplates
 {
@@ -13,7 +14,21 @@ namespace NTemplates
     /// </summary>
     public class DataManager
     {
-        Dictionary<string, TableManager> tables = new Dictionary<string, TableManager>();
+
+        Dictionary<string, dynamic> lists = new Dictionary<string, dynamic>();
+        //lists.Add("int", new List<int>());
+        //lists.Add("string", new List<string>());
+
+        //lists["int"].Add(12);
+        //lists["string"].Add("str");
+
+        //foreach (KeyValuePair<string, dynamic> pair in lists) {
+        //   Type T = pair.Value.GetType();
+        //        Console.WriteLine(T.GetGenericArguments()[0].ToString());
+
+
+
+        Dictionary<string, TableManager> tables = new Dictionary<string, TableManager>();        
         Dictionary<string, string> variableMap = new Dictionary<string, string>();
         Dictionary<string, Int32> int32Variables = new Dictionary<string, Int32>();
         Dictionary<string, Double> doubleVariables = new Dictionary<string, Double>();
@@ -36,16 +51,21 @@ namespace NTemplates
         
         public void AddDataTable(DataTable table)
         {
-            if (table.TableName != "")
+            if (table.TableName != "") //TODO: Change to compare against IsNullOrEmpty instead
                 tables.Add(table.TableName, new TableManager(table));
             else
                 throw new Exception("DataTable.TableName property must be set before adding the DataTable object");
         }
 
+        public void AddObjectList<T>(IList<T> list)
+        {
+            lists.Add(typeof(T).Name, new ListManager<T>(list)); 
+        }
+
         internal void AddDataTable(DataTable table, string alias)
         {
             table.TableName = alias;
-            if (table.TableName != "")
+            if (table.TableName != "") //TODO: Change to compare against IsNullOrEmpty instead
                 tables.Add(table.TableName, new TableManager(table));
             else
                 throw new Exception("DataTable.TableName property must be set before adding the DataTable object");
@@ -67,15 +87,30 @@ namespace NTemplates
             get { return tables; }
         }
 
+        internal Dictionary<string, dynamic> Lists
+        {
+            get { return lists; }
+        }
+
         public List<ErrorInRecord> ErrorsInRecords { get; private set; }
 
         /// <summary>
         /// Returns a list of all possible placeholders (data fields).
         /// </summary>
         /// <returns></returns>
-        internal List<String> GetAllPlaceHolders(bool enclose)
+        internal List<string> GetAllPlaceHolders(bool enclose)
         {
-            List<String> result = new List<string>();
+            List<string> result = new List<string>();
+
+            /* 
+               GMendez: This is kind of a brutforce approach. Instead of returning the placeholders located in the document
+               it´s genarating any possible placeholder (even if not present in the document) based on the table columns and 
+               returning them. The caller will iterate one by one and try to replace the text, which is inneficient!! 
+
+               Fix so only the placeholders that actually exist in the document are returned.
+               
+             */
+                
             foreach (TableManager tbmgr in Tables.Values)
             {
                 string prefix = tbmgr.Table.TableName + ".";
@@ -84,7 +119,7 @@ namespace NTemplates
                     string sufix = column.ColumnName;
                     if (enclose)
                     {
-                        result.Add(new CommonMethods(Parser).Prepare(prefix + sufix));
+                        result.Add(new CommonMethods(Parser).AddDelimiters(prefix + sufix));
                     }
                     else
                         result.Add(prefix + sufix);
@@ -104,7 +139,7 @@ namespace NTemplates
 
         internal List<string> GetPlaceholdersForVariables()
         {
-            return variableMap.Keys.Select(var => new CommonMethods(Parser).Prepare(var)).ToList<string>();
+            return variableMap.Keys.Select(var => new CommonMethods(Parser).AddDelimiters(var)).ToList<string>();
         }
 
         internal string GetCurrentValueForPlaceHolder(string field)
@@ -149,8 +184,8 @@ namespace NTemplates
             {
                 //Get the table manager for grabbing further info to build the error object
                 string[] parts = field.Trim().Split('.');
-                string fieldName = parts[1].Replace(Parser._d, "");
-                TableManager tbmgr = Tables[parts[0].Replace(Parser._d, "")];
+                string fieldName = (new CommonMethods(Parser)).ClearDelimiters(parts[1]); //.Replace(Parser._d, "");
+                TableManager tbmgr = Tables[(new CommonMethods(Parser)).ClearDelimiters(parts[0]) /*.Replace(Parser._d, "")*/];
                 ErrorInRecord err = new ErrorInRecord()
                 {
                     FieldName = field,
@@ -189,25 +224,33 @@ namespace NTemplates
             if (field.Contains("."))
             {
                 string[] parts = field.Trim().Split('.');
-                string fieldname = parts[1].Replace(Parser._d, "");
-                TableManager tbmgr = Tables[parts[0].Replace(Parser._d, "")];
-                DataRow currentRow = tbmgr.Table.Rows[tbmgr.CurrentRecord];
-                if (currentRow.Table.Columns[fieldname].DataType == typeof(string))
+                string fieldname = (new CommonMethods(Parser)).ClearDelimiters(parts[1]);
+                string tableName = (new CommonMethods(Parser)).ClearDelimiters(parts[0]);
+                try
                 {
-                    if (quotesIfString)
-                        theValue = "\"" + currentRow[fieldname] + "\"";
+                    TableManager tbmgr = Tables[tableName];
+                    DataRow currentRow = tbmgr.Table.Rows[tbmgr.CurrentRecord];
+                    if (currentRow.Table.Columns[fieldname].DataType == typeof(string))
+                    {
+                        if (quotesIfString)
+                            theValue = "\"" + currentRow[fieldname] + "\"";
+                        else
+                            theValue = currentRow[fieldname];
+                    }
                     else
+                    {
                         theValue = currentRow[fieldname];
+                    }
                 }
-                else
+                catch (Exception ex)
                 {
-                    theValue = currentRow[fieldname];
+                    throw ex; //This is just for debugging!
                 }
             }
             else
             {
                 //It's a variable
-                string variableName = field.Replace(Parser._d, "");
+                string variableName = (new CommonMethods(Parser)).ClearDelimiters(field); //  field.Replace(Parser._d, "");
                 if (variableMap.ContainsKey(variableName))
                 {
                     switch (variableMap[variableName])

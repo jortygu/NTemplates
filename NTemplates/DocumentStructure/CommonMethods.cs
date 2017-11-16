@@ -13,9 +13,15 @@ namespace NTemplates.DocumentStructure
             _parser = p;
         }
 
-        internal string Prepare(string placeholder)
+
+        internal string AddDelimiters(string placeholder)
         {
-            return _parser._d + placeholder + _parser._d;
+            return Regex.Unescape(_parser.LDel) + placeholder + Regex.Unescape(_parser.RDel);
+        }
+
+        internal string ClearDelimiters(string placeholder)
+        {
+            return placeholder.Replace(Regex.Unescape(_parser.LDel), "").Replace(Regex.Unescape(_parser.RDel), "");
         }
 
         /// <summary>
@@ -37,7 +43,7 @@ namespace NTemplates.DocumentStructure
                 }
                 return GetReplacementsForFunctions(textAux);
             }
-            catch
+            catch (Exception ex)
             {
                 return null;
             }

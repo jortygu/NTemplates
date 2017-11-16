@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Invoices;
+using System;
 using Xunit;
 /// <summary>
 /// Note if the code or options are changed inside of the Invoice example, the tests will fail. 

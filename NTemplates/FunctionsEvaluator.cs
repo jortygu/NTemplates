@@ -58,8 +58,8 @@ namespace NTemplates
             int paramEnd = data.IndexOf(")");
             string[] parameters = data.Substring(paramStart, paramEnd - paramStart).Split(',');
 
-            string text = manager.GetCurrentValueForPlaceHolder(new CommonMethods(manager.Parser).Prepare(parameters[0].Trim())).ToString();
-            string hplnk = manager.GetCurrentValueForPlaceHolder(new CommonMethods(manager.Parser).Prepare(parameters[1].Trim())).ToString();
+            string text = manager.GetCurrentValueForPlaceHolder(new CommonMethods(manager.Parser).AddDelimiters(parameters[0].Trim())).ToString();
+            string hplnk = manager.GetCurrentValueForPlaceHolder(new CommonMethods(manager.Parser).AddDelimiters(parameters[1].Trim())).ToString();
 
             //original
             string ret = "{\\field\\flddirty{\\*\\fldinst {HYPERLINK \"" + hplnk + "\" }}{\\fldrslt{" + text + "}}}";
@@ -91,8 +91,12 @@ namespace NTemplates
 
         private static string GetStringData(string data, DataManager manager, Match m, TemplateFunctions func)
         {
-            string varName = data.Replace(m.ToString(), string.Empty).Replace("(", string.Empty).Replace(")", string.Empty).Replace(",", string.Empty).Replace(GetFunctionName(func), string.Empty).Replace(manager.Parser._d, string.Empty);
-            string varValue = manager.GetCurrentValueForPlaceHolder(new CommonMethods(manager.Parser).Prepare(varName)).ToString();
+            
+            string varNameDelimited = data.Replace(m.ToString(), string.Empty).Replace("(", string.Empty).Replace(")", string.Empty).Replace(",", string.Empty).Replace(GetFunctionName(func), string.Empty);      //.Replace(manager.Parser._d, string.Empty);
+            string varName = (new CommonMethods(manager.Parser)).ClearDelimiters(varNameDelimited);
+
+            //TODO: Gonzalo come back and review this!!! We already have the value for the parameter
+            string varValue = manager.GetCurrentValueForPlaceHolder(new CommonMethods(manager.Parser).AddDelimiters(varName)).ToString();
             return varValue;
         }
     }

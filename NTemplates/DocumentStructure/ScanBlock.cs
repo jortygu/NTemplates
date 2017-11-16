@@ -94,7 +94,7 @@ namespace NTemplates.DocumentStructure
 
         private void InitializeFromMatch(Match start, bool hasCondition)
         {
-            string regex = start.ToString().Replace(DocumentParser._d, "");
+            string regex = (new CommonMethods(DocumentParser)).ClearDelimiters(start.ToString()); // start.ToString().Replace(DocumentParser._d, "");
 
             string nameSubstring;
             if (hasCondition)
@@ -172,9 +172,14 @@ namespace NTemplates.DocumentStructure
 
                 if (isMatch)
                 {
+                    //TODO: Should we raise an event for each match??
                     foreach (IControlBlock cb in Children)
                         cb.Expand();
                 }
+                //else 
+                //{
+                //    //TODO: Should we raise an event for each fail??
+                //}
 
                 #region AfterScanRecord event
 

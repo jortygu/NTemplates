@@ -5,7 +5,7 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{49E85D94-3314-4C77-908E-DF4D3811D9F4}</ProjectGuid>
+    <ProjectGuid>{51C23ED9-4E3C-4BF3-8DB6-DEE05C7D2DCD}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Invoices</RootNamespace>
