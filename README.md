@@ -6,4 +6,4 @@ NTemplates includes a very simple interpreted programming language. This allows 
 
 This project started as a hobby, and it's my humble intent to give back to the development community a little piece of what I got all these year of being a software developer. I'm offering this component to anyone that may need it for any project; open source or not, or even commercial. 
 
-If you liked NTemplates or it was useful for you, don't forget to visit us at www.rocksolidlabs.com
+If you liked NTemplates or it was useful for you, don't forget to visit us at https://www.linkedin.com/in/gonzalomendezdiaz/
