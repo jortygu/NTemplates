@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text;
 using System.Text.RegularExpressions;
 using NTemplates.DocumentStructure;
 
@@ -29,7 +30,7 @@ namespace NTemplates
                     {
                         case TemplateFunctions.DateFormat:
                             {
-                                return DateTime.Parse(GetStringData(data, manager, m, function)).ToString(format);
+                                return DataManager.GetRtfText(DateTime.Parse(GetStringData(data, manager, m, function)).ToString(format), Encoding.UTF32);
                             }
                         case TemplateFunctions.DoubleFormat:
                             {
