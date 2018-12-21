@@ -142,7 +142,7 @@ namespace NTemplates
                             @"\hex " + str + "}";
                         return mpic.Trim();
                     }
-                    return GetRtfText(theValue.ToString().Trim(), Encoding.UTF32);
+                    return GetRtfText(theValue.ToString().Trim(), Encoding.GetEncoding(1252));
                 }
             }
             catch (Exception ex)
