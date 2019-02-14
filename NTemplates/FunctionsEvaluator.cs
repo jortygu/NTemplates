@@ -30,11 +30,11 @@ namespace NTemplates
                     {
                         case TemplateFunctions.DateFormat:
                             {
-                                return DataManager.GetRtfText(DateTime.Parse(GetStringData(data, manager, m, function)).ToString(format), Encoding.UTF32);
+                                return DataManager.GetRtfText(DateTime.Parse(GetStringData(data, manager, m, function)).ToString(format), Encoding.GetEncoding(1252));
                             }
                         case TemplateFunctions.DoubleFormat:
                             {
-                                return Double.Parse(GetStringData(data, manager, m, function)).ToString(format);
+                                return DataManager.GetRtfText(Double.Parse(GetStringData(data, manager, m, function)).ToString(format), Encoding.GetEncoding(1252));
                             }
                     }
                 }
