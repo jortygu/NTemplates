@@ -142,7 +142,7 @@ namespace NTemplates.NetCore
                             @"\hex " + str + "}";
                         return mpic.Trim();
                     }
-                    return GetRtfText(theValue.ToString().Trim(), Encoding.GetEncoding(1252));
+                    return GetRtfText(theValue.ToString().Trim());
                 }
             }
             catch (Exception ex)
@@ -265,6 +265,21 @@ namespace NTemplates.NetCore
                 }
             }
             return res.ToString();
+        }
+
+        internal static string GetRtfText(string s)
+        {
+            var sb = new StringBuilder();
+            foreach (var c in s)
+            {
+                if (c == '\\' || c == '{' || c == '}')
+                    sb.Append(@"\" + c);
+                else if (c <= 0x7f)
+                    sb.Append(c);
+                else
+                    sb.Append("\\u" + Convert.ToUInt32(c) + "? ");
+            }
+            return sb.ToString();
         }
 
         /// <summary>
