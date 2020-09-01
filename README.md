@@ -4,6 +4,7 @@
 ## .Net Core
 [![NuGet](https://img.shields.io/nuget/v/NTemplates.NetCore.svg?style=flat-square)](https://www.nuget.org/packages/NTemplates.NetCore)
 [![NuGet Download](https://img.shields.io/nuget/dt/NTemplates.NetCore.svg?style=flat-square)](https://www.nuget.org/packages/NTemplates.NetCore)
+
 Fork Form [gmddmg/NTemplates](https://github.com/gmddmg/NTemplates), add .NetCore Support & nuget package.
 
 ## .Net Framework
