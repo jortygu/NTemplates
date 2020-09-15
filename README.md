@@ -8,6 +8,9 @@
 Fork Form [gmddmg/NTemplates](https://github.com/gmddmg/NTemplates), add .NetCore Support & nuget package.
 
 ## .Net Framework
+[![NuGet](https://img.shields.io/nuget/v/NTemplates.Framework.svg?style=flat-square)](https://www.nuget.org/packages/NTemplates.Framework)
+[![NuGet Download](https://img.shields.io/nuget/dt/NTemplates.Framework.svg?style=flat-square)](https://www.nuget.org/packages/NTemplates.Framework)
+
 NTemplates is a reporting library for .NET written 100% in C#. It allows your end users to define custom report templates as RTF Documents. This way, your application just needs to specify the placeholders for letting the user build a given template, and the required data for generating the report. NTemplates will generate the report based on the users’ report template. 
 
 The final report is also a RTF document, so it can be edited or used in any other way an RTF document could be used.
